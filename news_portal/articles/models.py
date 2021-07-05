@@ -1,38 +1,53 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Sum
 
 
 class Author(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    rating_author = models.IntegerField(default=0)
+    authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
+    ratingAuthor = models.IntegerField(default=0)
 
-    # def update_rating(self):
+    def update_rating(self):
+        postRate = self.post_set.all().aggregate(postRating=Sum('rating'))   # post_set.all() - получаем все связанные посты
+        pRat = 0   # aggregate() - метод позволяющий работать с множеством записей
+        pRat += postRate.get('postRating')
+        commentRat = self.authorUser.comment_set.all().aggregate(commentRating=Sum('rating'))
+        cRat = 0
+        cRat += commentRat.get('commentRating')
 
+        self.ratingAuthor = pRat * 3 + cRat
+        self.save()
 
 
 class Category(models.Model):
-    name_category = models.CharField(max_length=64, unique=True)
+    name = models.CharField(max_length=64, unique=True)
 
 
 class Post(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)    # нужно ли каскадное удаление...
-    select = models.CharField(max_length=2, choices=POSITIONS)
-    date_add = models.DateField(auto_now_add = True)
-    category = models.ManyToManyField(Category, through=PostCategory)
-    head = models.CharField(max_length=64, unique=True)    # добавим уникальность заголовку
-    text = models.CharField()
-    rating_text = models.IntegerField(default=0)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
-    news = 'NE'
-    articles = 'AR'
-    POSITIONS = ((news, 'new'), (articles, 'article'))
+    NEWS = 'NW'
+    ARTICLE = 'AR'
+    CATEGORY_CHOICES = (
+        (NEWS, 'Новость'),
+        (ARTICLE, 'Статья'),
+    )
+
+    caregoryType = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE)   # исправить опечатку
+    dateCreation = models.DateField(auto_now_add = True)
+    postCategory = models.ManyToManyField(Category, through='PostCategory')
+    title = models.CharField(max_length=128)
+    text = models.TextField()
+    rating = models.SmallIntegerField(default=0)
+
+
 
     def like(self):
-        self.rating_text += 1
+        self.rating += 1
         self.save()
 
     def dislike(self):
-        self.rating_text -= 1
+        self.rating -= 1
         self.save()
 
     def preview(self):
@@ -40,22 +55,25 @@ class Post(models.Model):
 
 
 class PostCategory(models.Model):
-    post = models.ForeignKey(Post)
-    category = models.ForeignKey(Category)
+    postThrough = models.ForeignKey(Post, on_delete=models.CASCADE)
+    categoryThrough = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = CharField()
-    date_comment = models.DateField(auto_now_add = True)
-    rating_comment = models.IntegerField(default=0)
+    commentPost = models.ForeignKey(Post, on_delete=models.CASCADE)
+    commentUser = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    dateCreation = models.DateField(auto_now_add = True)
+    rating = models.SmallIntegerField(default=0)
+
+    def __str__(self):
+        return self.commentUser.username
 
     def like(self):
-        self.rating_comment += 1
+        self.rating += 1
         self.save()
 
     def dislike(self):
-        self.rating_comment -= 1
+        self.rating -= 1
         self.save()
 
