@@ -4,7 +4,7 @@ from django.db.models import Sum
 
 
 class Author(models.Model):
-    authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
+    models.OneToOneField(User, on_delete=models.CASCADE)
     ratingAuthor = models.IntegerField(default=0)
 
     def update_rating(self):
