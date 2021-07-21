@@ -30,10 +30,10 @@ Posts
                     {{ post.title|censor }}
                 </td>
                 <td>
-                    {{ post.dateCreation|date:'d M Y' }}{{ post.dateCreation|time:"H:i" }}
+                    {{ post.dateCreation|date:'d M Y' }} {{ post.dateCreation|time:"H:i" }}
                 </td>
                 <td>
-                    {{ post.text|truncatechars:20 }}
+                    {{ post.text|truncatechars:20|censor }}
                 </td>
 
             </tr>

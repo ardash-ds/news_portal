@@ -10,7 +10,7 @@ def censor(value):
     value_list = value.split()
     for word in value_list:
         if word in censor_list:
-            word = 'цензура'
+            word = '*цензура*'
         value_new.append(word)
     value_censor = ' '.join(value_new)
     return value_censor
