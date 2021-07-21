@@ -1,0 +1,45 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Posts
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, ID которого было передано в адрес -->
+{% block content %}
+    <h1>Все посты</h1>
+    <h2>Всего статей: {{ news|length }}</h2>
+    {% if posts %}
+        <table>
+            <tr>
+                <td>
+                    Заголовок
+                </td>
+                <td>
+                    Дата публикации
+                </td>
+                <td>
+                    Анонс статьи
+                </td>
+
+            </tr>
+            {% for post in posts %}
+            <tr>
+                <td>
+                    {{ post.title|censor }}
+                </td>
+                <td>
+                    {{ post.dateCreation|date:'d M Y' }}{{ post.dateCreation|time:"H:i" }}
+                </td>
+                <td>
+                    {{ post.text|truncatechars:20 }}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>Постов нет</h2>
+    {% endif %}
+{% endblock content %}
