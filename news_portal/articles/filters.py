@@ -5,7 +5,7 @@ from .models import Post, Category, Comment
 
 # создаём фильтр
 class PostFilter(FilterSet):
-    dateCreation = DateFromToRangeFilter
+    dateCreation = DateFromToRangeFilter()
     # Здесь в мета классе надо предоставить модель и указать поля, по которым будет фильтроваться
     # (т. е. подбираться) информация о товарах
     class Meta:
@@ -37,8 +37,9 @@ class C(FilterSet):
         fields = ['postCategory']
 
 class X(FilterSet):
-    date = DateFromToRangeFilter
+    dateCreation = DateFromToRangeFilter()
 
     class Meta:
         model = Post
-        fields = {'dateCreation': ['range']}
+        # fields = {'dateCreation': ['range']}
+        fields = ['dateCreation']
