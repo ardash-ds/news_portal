@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+import datetime
 
 
 class Author(models.Model):
@@ -18,9 +19,14 @@ class Author(models.Model):
         self.ratingAuthor = pRat * 3 + cRat
         self.save()
 
+    def __str__(self):
+        return f'{self.authorUser}'
 
 class Category(models.Model):
     name = models.CharField(max_length=64, unique=True)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Post(models.Model):
@@ -34,8 +40,8 @@ class Post(models.Model):
     )
 
     caregoryType = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE)   # исправить опечатку
-    dateCreation = models.DateField()
-    timeCreation = models.TimeField()
+    dateCreation = models.DateField(auto_now_add=True)
+    # timeCreation = models.TimeField()
     postCategory = models.ManyToManyField(Category, through='PostCategory')
     title = models.CharField(max_length=128)
     text = models.TextField()
@@ -57,13 +63,16 @@ class Post(models.Model):
     def preview(self):
         return self.text[0:128] + '...'
 
+    def get_absolute_url(self):
+        return f'/posts/{self.id}'
+
 
 class PostCategory(models.Model):
     postThrough = models.ForeignKey(Post, on_delete=models.CASCADE)
     categoryThrough = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.categoryThrough.name
+        return f'{self.categoryThrough.name}'
 
 
 class Comment(models.Model):

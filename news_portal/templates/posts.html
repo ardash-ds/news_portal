@@ -31,6 +31,8 @@ Posts
             <tr>
                 <td>
                     <a href="{% url 'post_list' post.id %}">{{ post.title|censor }}</a>
+                    <a href="{% url 'update' post.id %}"> Редактировать </a>
+                    <a href="{% url 'delete' post.id %}">Удалить </a>
                 </td>
                 <td>
                     {{ post.dateCreation|date:'d M Y' }} {{ post.dateCreation|time:"H:i" }}
@@ -48,6 +50,9 @@ Posts
     {% else %}
         <h2>Постов нет</h2>
     {% endif %}
+
+<a href="{% url 'create' %}">Добавить новый пост</a><br>
+
 <!-- Проверяем что поддерживается постраничный вывод -->
 {% if is_paginated %}
 
@@ -71,9 +76,9 @@ Posts
 
 {% endif %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Добавить товар">
-</form>
+<!--<form method="POST">-->
+<!--    {% csrf_token %}-->
+<!--    {{ form }}-->
+<!--    <input type="submit" value="Добавить товар">-->
+<!--</form>-->
 {% endblock content %}

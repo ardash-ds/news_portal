@@ -10,12 +10,14 @@ class PostFilter(FilterSet):
     # (т. е. подбираться) информация о товарах
     class Meta:
         model = Post
-        fields = {
-            'title': ['icontains'],  # мы хотим чтобы нам выводило имя хотя бы отдалённо похожее на то что запросил пользователь
-            'author__authorUser__username': ['contains'],
-            'postCategory__name': ['contains'],
-            'dateCreation': ['range']
-        }
+        # fields = {
+        #     'title': ['icontains'],  # мы хотим чтобы нам выводило имя хотя бы отдалённо похожее на то что запросил пользователь
+        #     'author__authorUser__username': ['contains'],
+        #     'postCategory__name': ['contains'],
+        #     'dateCreation': ['range']
+        # }
+        fields = ['title', 'author__authorUser__username', 'postCategory__name', 'dateCreation',]
+
 
 class F(FilterSet):
     username = CharFilter(method='my_filter')
