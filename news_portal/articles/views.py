@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView, CreateView, DeleteView, U
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .filters import PostFilter, F, C, X  # импортируем недавно написанный фильтр
 from .models import Post, Comment
 from .forms import PostForm
@@ -77,7 +78,7 @@ class PostCreateView(CreateView):
     form_class = PostForm
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'post_create.html'
     form_class = PostForm
 
