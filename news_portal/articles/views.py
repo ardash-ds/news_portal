@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .filters import PostFilter, F, C, X  # импортируем недавно написанный фильтр
-from .models import Post, Comment
+from .models import Post, BaseRegisterForm
 from .forms import PostForm
 
 
@@ -91,3 +91,9 @@ class PostDeleteView(DeleteView):
     template_name = 'post_delete.html'
     queryset = Post.objects.all()
     success_url = '/posts/'
+
+
+class BaseRegisterView(CreateView):
+    model = User
+    form_class = BaseRegisterForm
+    success_url = '/'
