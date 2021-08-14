@@ -1,8 +1,9 @@
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.core.paginator import Paginator
-from django.shortcuts import render
-from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .filters import PostFilter, F, C, X  # импортируем недавно написанный фильтр
 from .models import Post, BaseRegisterForm
 from .forms import PostForm
@@ -73,12 +74,14 @@ class PostDetail(DetailView):
     queryset = Post.objects.all()
 
 
-class PostCreateView(CreateView):
+class PostCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = ('articles.add_post',)
     template_name = 'post_create.html'
     form_class = PostForm
 
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required = ('articles.change_post',)
     template_name = 'post_create.html'
     form_class = PostForm
 
@@ -87,7 +90,8 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         return Post.objects.get(pk=id)
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = ('articles.delete_post',)
     template_name = 'post_delete.html'
     queryset = Post.objects.all()
     success_url = '/posts/'
@@ -97,3 +101,12 @@ class BaseRegisterView(CreateView):
     model = User
     form_class = BaseRegisterForm
     success_url = '/'
+
+
+@login_required
+def upgrade_me(request):
+    user = request.user
+    autors_group = Group.objects.get(name='Authors')
+    if not request.user.groups.filter(name='Authors').exists():
+        autors_group.user_set.add(user)
+    return redirect('/')
