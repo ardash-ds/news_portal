@@ -1,25 +1,27 @@
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView, View
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .filters import PostFilter, F, C, X  # импортируем недавно написанный фильтр
-from .models import Post, BaseRegisterForm
+from .models import Post, BaseRegisterForm, Category, PostCategory
 from .forms import PostForm
 
 
 class PostList(ListView):
-    model = Post
+    model = Post, Category
     template_name = 'posts.html'
     context_object_name = 'posts'
     queryset = Post.objects.order_by('-dateCreation')
     paginate_by = 5  # поставим постраничный вывод в один элемент
+
     # form_class = PostForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['news'] = Post.objects.all(),
+        context['news'] = Post.objects.all().count()
+        context['category'] = Category.objects.all()
         context['form'] = PostForm()
         return context
 
@@ -30,6 +32,59 @@ class PostList(ListView):
             form.save()
 
         return super().get(request, *args, *kwargs)
+
+
+class CategoryDetail(ListView):
+    model = Post, Category
+    template_name = 'posts.html'
+    context_object_name = 'posts'
+
+    # queryset = Post.objects.filter(id=1)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news'] = Post.objects.all().count()
+        context['category'] = Category.objects.all()
+        context['form'] = PostForm()
+        return context
+
+    def get_queryset(self):
+        return Post.objects.filter(postCategory__id=self.kwargs['pk'])
+
+
+# class CategorySubscribe(View):
+#     model = PostCategory
+#
+#     def Post(self, request, *args, **kwargs):
+#         user = self.request.user
+#         category = get_object_or_404(Category, id=self.kwargs['pk'])
+#         # if category.subscribers.filter(id=request.user.id).exists():
+#         #     category.subscribers.remove(user)
+#         # else:
+#         category.subscribers.add(user)
+#         return redirect('posts/')
+
+# def subscribe_view(request, pk):
+#     category = Category.objects.get(id=pk)
+#     user = request.user
+#     category.subscribers.add(user)
+#     return redirect(request.META.get('HTTP_REFERER'))
+#
+# def test(request):
+#     sub = Category.objects.all()
+#     return render(request, 'test.html', {'sub': sub})
+
+
+
+# class Subscribe(ListView):
+#     model = Category
+#     template_name = 'subscribers.html'
+#     context_object_name = 'subscribers'
+#     # queryset = Category.objects.all()
+#
+#     def get_queryset(self):
+#         return Category.objects.get(id=self.kwargs['pk'])
+
 
 class PostSearch(ListView):
     model = Post

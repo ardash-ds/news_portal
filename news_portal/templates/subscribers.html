@@ -1,0 +1,22 @@
+{% extends 'flatpages/default.html' %}
+
+<!--{% load custom_filters %}-->
+
+{% block title %}
+
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, ID которого было передано в адрес -->
+{% block content %}
+<!--<div>Список категорий</div>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--    {% for cat in category %}-->
+<!--            <a href="{% url 'category_list' cat.id %}">{{ cat }}</a>-->
+<!--    {% endfor %}-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+{{ subscribers }}
+{% endblock content %}

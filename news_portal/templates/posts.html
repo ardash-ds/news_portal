@@ -8,8 +8,19 @@ Posts
 
 <!-- В контенте на странице мы выводим сам товар, ID которого было передано в адрес -->
 {% block content %}
+<div>Список категорий</div>
+<table>
+    <tr>
+        <td>
+    {% for cat in category %}
+            <a href="{% url 'category_list' cat.id %}">{{ cat }}</a>
+    {% endfor %}
+        </td>
+    </tr>
+</table>
+</table>
     <h1>Все посты</h1>
-    <h2>Всего статей: {{ news|length }}</h2>
+    <h2>Всего статей: {{ news }}</h2>
     {% if posts %}
         <table>
             <tr>
@@ -42,6 +53,7 @@ Posts
                 </td>
                 <td>
                     {{ post.get_caregoryType_display }}
+                    {{ post.postCategory.categoryThrough }}   <!--не работает!-->
                 </td>
 
             </tr>
@@ -75,6 +87,8 @@ Posts
     {% endif %}
 
 {% endif %}
+<br>
+
 
 <!--<form method="POST">-->
 <!--    {% csrf_token %}-->
