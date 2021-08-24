@@ -64,11 +64,11 @@ class CategoryDetail(ListView):
 #         category.subscribers.add(user)
 #         return redirect('posts/')
 
-# def subscribe_view(request, pk):
-#     category = Category.objects.get(id=pk)
-#     user = request.user
-#     category.subscribers.add(user)
-#     return redirect(request.META.get('HTTP_REFERER'))
+def subscribe_view(request, pk):
+    category = Category.objects.get(id=pk)
+    user = request.user
+    category.subscribers.add(user)
+    return redirect(request.META.get('HTTP_REFERER'))
 #
 # def test(request):
 #     sub = Category.objects.all()
