@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.http import HttpResponse
+from django.urls import reverse
 from .filters import PostFilter, F, C, X  # импортируем недавно написанный фильтр
-from .models import Post, BaseRegisterForm
+from .models import Post, BaseRegisterForm, Category
 from .forms import PostForm
 
 
@@ -19,7 +21,8 @@ class PostList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['news'] = Post.objects.all(),
+        context['news'] = Post.objects.all().count()
+        context['category'] = Category.objects.all()
         context['form'] = PostForm()
         return context
 
@@ -30,6 +33,22 @@ class PostList(ListView):
             form.save()
 
         return super().get(request, *args, *kwargs)
+
+
+class CategoryDetail(ListView):
+    model = Post
+    template_name = 'category.html'
+    context_object_name = 'posts'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news'] = Post.objects.filter(postCategory__id=self.kwargs['pk']).count()
+        context['category'] = Category.objects.all()
+        return context
+
+    def get_queryset(self):
+        return Post.objects.filter(postCategory__id=self.kwargs['pk'])
+
 
 class PostSearch(ListView):
     model = Post
@@ -110,3 +129,27 @@ def upgrade_me(request):
     if not request.user.groups.filter(name='Authors').exists():
         autors_group.user_set.add(user)
     return redirect('/')
+
+
+def subscribe(request, pk):
+    pass
+    # post = Post.objects.get(id=pk)
+    # cat_id = post.postCategory.values('id')
+    # user = request.user
+    # subscriber = User.objects.filter(username=str(user)).last()
+    # for i in cat_id:
+    #     category = Category.objects.filter(id=i).last()
+    #     category.subscribers.add(subscriber)
+    # cat = Category.objects.all().values('subscribers')
+
+    # return render(request, 'subscribe.html', {'obj': cat})
+    # user = request.user
+    # subscriber = User.objects.filter(username=user).last()
+    # cat_id = Post.objects.filter(id=pk).values('postCategory__id')
+    # category = Category.objects.filter(id=cat_id).last()
+    # category.subscribers.add(subscriber)
+    # return HttpResponse(f'{subscriber.username}')
+    # return HttpResponse(reverse('post_list', args=[str(pk)]))
+
+
+

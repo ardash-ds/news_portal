@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .views import (
     PostList, PostDetail, PostSearch, user_list, post_list, comment_list,
     PostCreateView, PostDeleteView, PostUpdateView, BaseRegisterView, upgrade_me,
+    subscribe, CategoryDetail
 )
 
 
@@ -22,4 +23,6 @@ urlpatterns = [
     path('signup/', BaseRegisterView.as_view(template_name='signup.html'), name='signup'),
     path('upgrade/', upgrade_me, name='upgrade'),
     path('accounts/', include('allauth.urls')),
+    path('subscribe/<int:pk>', subscribe, name='subscribe'),
+    path('category/<int:pk>', CategoryDetail.as_view(), name='category'),
 ]
