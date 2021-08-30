@@ -35,19 +35,17 @@ class PostList(ListView):
         return super().get(request, *args, *kwargs)
 
 
-class CategoryDetail(ListView):
-    model = Post
+class CategoryDetail(DetailView):
+    model = Category
     template_name = 'category.html'
-    context_object_name = 'posts'
+    context_object_name = 'category'
+    queryset = Category.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.filter(postCategory__id=self.kwargs['pk']).order_by('-dateCreation')
         context['news'] = Post.objects.filter(postCategory__id=self.kwargs['pk']).count()
-        context['category'] = Category.objects.all()
         return context
-
-    def get_queryset(self):
-        return Post.objects.filter(postCategory__id=self.kwargs['pk'])
 
 
 class PostSearch(ListView):
@@ -69,21 +67,6 @@ class PostSearch(ListView):
             **super().get_context_data(*args, **kwargs),
             'filter': self.get_filter(),
         }
-
-
-def user_list(request):
-    f = F(request.GET, queryset=User.objects.all())
-    return render(request, 'user_t.html', {'filter': f})
-
-
-def post_list(request):
-    c = C(request.GET, queryset=Post.objects.all())
-    return render(request, 'post_t.html', {'filter': c})
-
-
-def comment_list(request):
-    x = X(request.GET, queryset=Post.objects.all())
-    return render(request, 'comment_t.html', {'filter': x})
 
 
 class PostDetail(DetailView):
@@ -132,24 +115,24 @@ def upgrade_me(request):
 
 
 def subscribe(request, pk):
-    pass
-    # post = Post.objects.get(id=pk)
-    # cat_id = post.postCategory.values('id')
-    # user = request.user
-    # subscriber = User.objects.filter(username=str(user)).last()
-    # for i in cat_id:
-    #     category = Category.objects.filter(id=i).last()
-    #     category.subscribers.add(subscriber)
-    # cat = Category.objects.all().values('subscribers')
-
-    # return render(request, 'subscribe.html', {'obj': cat})
-    # user = request.user
-    # subscriber = User.objects.filter(username=user).last()
-    # cat_id = Post.objects.filter(id=pk).values('postCategory__id')
-    # category = Category.objects.filter(id=cat_id).last()
-    # category.subscribers.add(subscriber)
-    # return HttpResponse(f'{subscriber.username}')
-    # return HttpResponse(reverse('post_list', args=[str(pk)]))
+    user = request.user
+    subscriber = User.objects.filter(username=user).last()
+    category = Category.objects.filter(id=pk).last()
+    category.subscribers.add(subscriber)
+    return HttpResponse(f'{subscriber.username}, вы подписались на категорию {category.name}')
 
 
 
+def user_list(request):
+    f = F(request.GET, queryset=User.objects.all())
+    return render(request, 'user_t.html', {'filter': f})
+
+
+def post_list(request):
+    c = C(request.GET, queryset=Post.objects.all())
+    return render(request, 'post_t.html', {'filter': c})
+
+
+def comment_list(request):
+    x = X(request.GET, queryset=Post.objects.all())
+    return render(request, 'comment_t.html', {'filter': x})
