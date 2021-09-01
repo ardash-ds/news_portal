@@ -1,5 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.core.paginator import Paginator
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
@@ -114,14 +116,17 @@ def upgrade_me(request):
     return redirect('/')
 
 
+@login_required
 def subscribe(request, pk):
     user = request.user
     subscriber = User.objects.filter(username=user).last()
     category = Category.objects.filter(id=pk).last()
-    category.subscribers.add(subscriber)
-    return HttpResponse(f'{subscriber.username}, вы подписались на категорию {category.name}')
-
-
+    if category.subscribers.filter(id=request.user.id).exists():
+        category.subscribers.remove(subscriber)
+        return HttpResponse(f'{subscriber.username}, вы отписались от категории {category.name}')
+    else:
+        category.subscribers.add(subscriber)
+        return HttpResponse(f'{subscriber.username}, вы подписались на категорию {category.name}')
 
 def user_list(request):
     f = F(request.GET, queryset=User.objects.all())
