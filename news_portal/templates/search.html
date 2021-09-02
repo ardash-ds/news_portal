@@ -9,6 +9,11 @@ Posts
 
 {% block content %}
 
+<h2>Категории:</h2>
+{% for cat in category %}
+    <a href="{% url 'category' cat.id %}"> {{ cat }} </a>
+{% endfor %}
+
 <!-- Перед таблицей добавим форму для поиска -->
 <form method="GET">
     {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
@@ -16,7 +21,7 @@ Posts
 </form>
 
     <h1>Все посты</h1>
-    <h2>Всего статей: {{ news|length }}</h2>
+    <h2>Всего статей: {{ news }}</h2>
     {% if posts %}
         <table>
             <tr>

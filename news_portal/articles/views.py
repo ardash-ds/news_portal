@@ -7,10 +7,53 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponse
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 from django.urls import reverse
 from .filters import PostFilter, F, C, X  # импортируем недавно написанный фильтр
 from .models import Post, BaseRegisterForm, Category
 from .forms import PostForm
+
+
+@receiver(post_save, sender=Post)
+def notify_users_post(sender, instance, created, **kwargs):
+    if created:
+        subject = f'Новый пост / статья в любимой категории {instance.postCategory}'
+    else:
+        subject = f'Пост / статья {instance.title} обновилась!'
+    cat_id = instance.postCategory__id
+    subscribers = Category.objects.filter(id=cat_id).value_list('subscriber', flat=True)
+    # subscribers = instance.categoryThrough.subscribers.all()
+    addresses = []
+    for i in subscribers:
+        addresses.append(i.email)
+    # for user_id in list(instance.categoryThrough.subscribers.all().value_list('subscriber', flat=True)):
+    #     user = User.objects.get(id=user_id)
+
+    # получаем наш html
+        html_content = render_to_string(
+            'sub_mail.html',
+            {
+                'title': instance.title,
+                'text': instance.text,
+                'category': instance.category,
+                # 'username': user.username,
+                'link': f'http://127.0.0.1:8000/Posts/{instance.id}',
+            }
+        )
+
+        # в конструкторе уже знакомые нам параметры, да? Называются правда немного по другому, но суть та же.
+        msg = EmailMultiAlternatives(
+            subject=subject,
+
+            from_email='info1981@yandex.ru',
+            to=[*addresses],  # это то же, что и recipients_list
+        )
+        msg.attach_alternative(html_content, "text/html")  # добавляем html
+
+        msg.send()  # отсылаем
+
+
 
 
 class PostList(ListView):
@@ -65,10 +108,11 @@ class PostSearch(ListView):
         return self.get_filter().qs
 
     def get_context_data(self, *args, **kwargs):
-        return {
-            **super().get_context_data(*args, **kwargs),
-            'filter': self.get_filter(),
-        }
+        context = super().get_context_data(**kwargs)
+        context['news'] = Post.objects.all().count()
+        context['category'] = Category.objects.all()
+        context['filter'] = self.get_filter()
+        return context
 
 
 class PostDetail(DetailView):

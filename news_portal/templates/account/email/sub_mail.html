@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>Здравствуйте, {{ username|title }}</p>
+<br/><br/>
+<p>Вы подписаны на категорию: {{ category|title }}. </p>
+<p>Предлагаем ознакомиться с новой статьей</p>
+<br/><br/>
+<a style="text-align: left;" href="{{ link }}" >{{ text|truncatewords:50 }}<a/>
+<br/><br/>
+<t1>С уважением...</t1>
+
+</body>
+
+</html>
