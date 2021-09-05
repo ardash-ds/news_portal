@@ -6,11 +6,10 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.db.models.signals import m2m_changed
 from .models import Post, BaseRegisterForm, Category
 
+from datetime import datetime, timedelta
+from django.utils.timezone import localtime
+from django.contrib.auth.models import User
 
-
-
-# @receiver(post_save, sender=Post)
-# @receiver(m2m_changed, sender=Post.postCategory.through)
 
 @receiver(post_save, sender=Post)
 def notify_users_post(sender, instance, created, **kwargs):
@@ -19,13 +18,6 @@ def notify_users_post(sender, instance, created, **kwargs):
     for category in categories:
         for sub in category.subscribers.values('email'):
             subscribers_mail.append(sub['email'])
-    # print(instance.id)
-    # send_mail(
-    #     subject=f'Заголовок сообщения',
-    #     message=f'На сайте появилась новая статья {instance.title} : {instance.text}',
-    #     from_email='info1981@yandex.ru',
-    #     recipient_list=subscribers_mail
-    # )
 
     # получаем наш html
     content = render_to_string('account/email/sub_mail.html', {
