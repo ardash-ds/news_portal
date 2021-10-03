@@ -4,6 +4,7 @@ from django.db.models import Sum
 from django.contrib.auth.forms import UserCreationForm
 from allauth.account.forms import SignupForm
 from django import forms
+from django.core.cache import cache
 
 
 class Author(models.Model):
@@ -68,6 +69,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return f'/posts/{self.id}'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        cache.delete(f'product-{self.pk}')
 
 
 class PostCategory(models.Model):
