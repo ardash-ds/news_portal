@@ -104,7 +104,8 @@ class PostDetail(DetailView):
         obj = cache.get(f'product-{self.kwargs["pk"]}', None)
 
         if not obj:
-            obj = super().get_object(queryset=kwargs['queryset'])
+            obj = super().get_object(*args, **kwargs)
+            # obj = super().get_object(queryset=kwargs['queryset'])
             cache.set(f'product-{self.kwargs["pk"]}', obj)
 
         return obj
