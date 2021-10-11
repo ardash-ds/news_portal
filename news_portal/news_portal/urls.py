@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from articles.views import runtasks
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,4 +24,5 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('', include('protect.urls')),
     path('accounts/', include('allauth.urls')),
+    path('celery/', runtasks.as_view()),
 ]

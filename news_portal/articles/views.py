@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView, View
 
 from datetime import datetime, timedelta
 from django.utils.timezone import localtime
@@ -17,6 +17,8 @@ from django.urls import reverse
 from .filters import PostFilter, F, C, X  # импортируем недавно написанный фильтр
 from .models import Post, BaseRegisterForm, Category
 from .forms import PostForm
+from .tasks import hello, printer
+
 
 
 class PostList(ListView):
@@ -148,3 +150,10 @@ def post_list(request):
 def comment_list(request):
     x = X(request.GET, queryset=Post.objects.all())
     return render(request, 'comment_t.html', {'filter': x})
+
+
+class runtasks(View):
+    def get(self, request):
+        printer.apply_async([10], countdown = 5)
+        hello.delay()
+        return HttpResponse('Hello!')
