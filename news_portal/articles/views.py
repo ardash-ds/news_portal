@@ -1,23 +1,12 @@
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView, View
-
-from datetime import datetime, timedelta
-from django.utils.timezone import localtime
-from django.core.paginator import Paginator
-from django.db.models.signals import post_save
-from django.core.mail import send_mail
-from django.dispatch import receiver
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponse
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.urls import reverse
 from .filters import PostFilter, F, C, X  # импортируем недавно написанный фильтр
 from .models import Post, BaseRegisterForm, Category
 from .forms import PostForm
-from .tasks import hello, printer
 
 
 
@@ -151,9 +140,3 @@ def comment_list(request):
     x = X(request.GET, queryset=Post.objects.all())
     return render(request, 'comment_t.html', {'filter': x})
 
-
-class runtasks(View):
-    def get(self, request):
-        printer.apply_async([10], countdown = 5)
-        hello.delay()
-        return HttpResponse('Hello!')

@@ -10,7 +10,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.conf.beat_schedule = {
     'print_every_5_seconds': {
-        'task': 'articles.tasks.printer',
+        'task': 'articles.tasks.monday_newsletter',
         'schedule': crontab(hour=8, minute=0, day_of_week='monday'),
     },
 }
