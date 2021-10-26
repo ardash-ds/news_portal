@@ -50,6 +50,11 @@ class Post(models.Model):
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
 
+    @property
+    def rating_100(self):
+        return self.rating > 100
+
+
     def __str__(self):
         return f'{self.title}: {self.text[:20]}'
 
