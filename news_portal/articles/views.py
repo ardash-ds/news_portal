@@ -7,10 +7,14 @@ from django.http import HttpResponse
 from .filters import PostFilter, F, C, X  # импортируем недавно написанный фильтр
 from .models import Post, BaseRegisterForm, Category
 from .forms import PostForm
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 
 class PostList(ListView):
+    # logger.info('INFO')
     model = Post
     template_name = 'posts.html'
     context_object_name = 'posts'
