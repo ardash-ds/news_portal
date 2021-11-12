@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 
 
 class PostList(ListView):
-    # logger.info('INFO')
     model = Post
     template_name = 'posts.html'
     context_object_name = 'posts'

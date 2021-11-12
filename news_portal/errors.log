@@ -1,0 +1,29 @@
+2021-11-12 12:51:26,210 ERROR Internal Server Error: /posts/mail/ C:\projects\new\venv\lib\site-packages\django\utils\log.py (<class 'NameError'>, NameError("name 'arequest' is not defined"), <traceback object at 0x0000029AF1FC9BC0>)
+Traceback (most recent call last):
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\projects\new\news_portal\articles\views.py", line 25, in test_mail
+    print(f'Test mail{arequest}')
+NameError: name 'arequest' is not defined
+2021-11-12 12:51:27,060 ERROR "GET /posts/mail/ HTTP/1.1" 500 70852 C:\projects\new\venv\lib\site-packages\django\core\servers\basehttp.py None
+2021-11-12 12:59:45,452 ERROR Internal Server Error: /posts/mail/ C:\projects\new\venv\lib\site-packages\django\utils\log.py (<class 'NameError'>, NameError("name 'arequest' is not defined"), <traceback object at 0x000001CD7B5A8F80>)
+Traceback (most recent call last):
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\projects\new\news_portal\articles\views.py", line 25, in test_mail
+    print(f'Test mail{arequest}')
+NameError: name 'arequest' is not defined
+2021-11-12 12:59:46,433 ERROR "GET /posts/mail/ HTTP/1.1" 500 70361 C:\projects\new\venv\lib\site-packages\django\core\servers\basehttp.py None
+2021-11-12 12:59:56,956 ERROR Internal Server Error: /posts/mail/ C:\projects\new\venv\lib\site-packages\django\utils\log.py (<class 'NameError'>, NameError("name 'arequest' is not defined"), <traceback object at 0x000001CD7B504600>)
+Traceback (most recent call last):
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\projects\new\news_portal\articles\views.py", line 25, in test_mail
+    print(f'Test mail{request}')
+NameError: name 'arequest' is not defined

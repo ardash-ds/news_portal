@@ -1,31 +1,36 @@
-INFO Watching for file changes with StatReloader
-INFO "GET /posts/search/ HTTP/1.1" 200 6659
-INFO "GET /posts/13 HTTP/1.1" 200 2119
-INFO "GET /posts/search/ HTTP/1.1" 200 6659
-INFO C:\projects\new\news_portal\articles\views.py changed, reloading.
-INFO Watching for file changes with StatReloader
-INFO C:\projects\new\news_portal\articles\views.py changed, reloading.
-INFO Watching for file changes with StatReloader
-INFO "GET /posts/13 HTTP/1.1" 200 2119
-INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
-INFO Watching for file changes with StatReloader 2021-11-11 15:25:51,279
-INFO "GET /posts/13 HTTP/1.1" 200 2119 2021-11-11 15:25:56,693
-INFO "GET /posts/search/ HTTP/1.1" 200 6659 2021-11-11 15:26:03,322
-INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-11 15:26:40,521
-INFO Watching for file changes with StatReloader 2021-11-11 15:26:44,655
-INFO "GET /posts/12 HTTP/1.1" 200 2129 2021-11-11 15:26:46,355
-INFO "GET /posts/search/ HTTP/1.1" 200 6659 2021-11-11 15:26:48,098
-INFO "GET / HTTP/1.1" 200 2096 2021-11-11 15:26:49,841
-INFO "GET /posts/search/ HTTP/1.1" 200 6659 2021-11-11 15:26:51,354
-INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-11 15:35:07,953
-INFO Watching for file changes with StatReloader 2021-11-11 15:35:10,221
-INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-11 15:35:47,774
-INFO Watching for file changes with StatReloader 2021-11-11 15:35:49,215
-INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-11 15:36:18,542
-INFO Watching for file changes with StatReloader 2021-11-11 15:36:19,917
-INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-11 16:10:01,385
-INFO Watching for file changes with StatReloader 2021-11-11 16:10:08,119
-INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-11 16:11:52,944
-INFO Watching for file changes with StatReloader 2021-11-11 16:11:55,722
-INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-11 16:18:12,711
-INFO Watching for file changes with StatReloader 2021-11-11 16:18:17,295
+
+INFO "GET /posts/17 HTTP/1.1" 200 2085 2021-11-12 11:51:14,660
+INFO C:\projects\new\news_portal\articles\views.py changed, reloading. 2021-11-12 11:51:26,565
+INFO Watching for file changes with StatReloader 2021-11-12 11:51:28,439
+ERROR Internal Server Error: /posts/mail/ 2021-11-12 11:51:34,540
+Traceback (most recent call last):
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\projects\new\news_portal\articles\views.py", line 25, in test_mail
+    print(f'Test mail{arequest}')
+NameError: name 'arequest' is not defined
+ERROR "GET /posts/mail/ HTTP/1.1" 500 68555 2021-11-12 11:51:35,330
+INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-12 11:52:11,838
+INFO Watching for file changes with StatReloader 2021-11-12 11:52:13,788
+INFO "GET /posts/search/ HTTP/1.1" 200 6659 2021-11-12 11:52:19,333
+ERROR Internal Server Error: /posts/mail/ 2021-11-12 11:52:30,670
+Traceback (most recent call last):
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\projects\new\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\projects\new\news_portal\articles\views.py", line 25, in test_mail
+    print(f'Test mail{arequest}')
+NameError: name 'arequest' is not defined
+ERROR "GET /posts/mail/ HTTP/1.1" 500 68554 2021-11-12 11:52:31,417
+INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-12 12:04:29,473
+INFO Watching for file changes with StatReloader 2021-11-12 12:11:25,677
+INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-12 12:12:15,413
+INFO Watching for file changes with StatReloader 2021-11-12 12:13:47,204
+INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-12 12:15:23,519
+INFO Watching for file changes with StatReloader 2021-11-12 12:15:25,238
+INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-12 12:15:52,189
+INFO Watching for file changes with StatReloader 2021-11-12 12:15:53,698
+INFO C:\projects\new\news_portal\news_portal\settings.py changed, reloading. 2021-11-12 12:17:04,564

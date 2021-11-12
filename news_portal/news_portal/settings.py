@@ -176,7 +176,7 @@ SERVER_EMAIL = 'info1981@yandex.ru'
 EMAIL_HOST = 'smtp.yandex.ru'  # адрес сервера Яндекс-почты для всех один и тот же
 EMAIL_PORT = 465  # порт smtp сервера тоже одинаковый
 EMAIL_HOST_USER = 'info1981'  # ваше имя пользователя, например, если ваша почта user@yandex.ru, то сюда надо писать user, иными словами, это всё то что идёт до собаки
-EMAIL_HOST_PASSWORD = 'ozfekihtbzdpjkwf'  # пароль от почты
+EMAIL_HOST_PASSWORD = 'nvakwdepjrdsdjpl'  # пароль от почты
 EMAIL_USE_SSL = True  # Яндекс использует ssl, подробнее о том, что это, почитайте в дополнительных источниках, но включать его здесь обязательно
 
 
@@ -204,47 +204,89 @@ LOGGING = {
     'disable_existing_loggers': False,
     'loggers': {
         'django': {
-            'handlers': ['consol', 'news'],
+            'handlers': ['consol_debug', 'consol_warning', 'consol_error', 'file_general'],
+            # 'handlers': ['consol_debug', 'consol_warning', 'file'],
             'level': 'INFO',
+            'propagate': True,
         },
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['file_errors', 'mail_admins'],
+            'level': 'INFO',
+        },
+        'django.server': {
+            'handlers': ['file_errors', 'mail_admins'],
+            'level': 'INFO',
+        },
+        'django.template': {
+            'handlers': ['file_errors'],
+            'level': 'INFO',
+        },
+        'django.db_backends': {
+            'handlers': ['file_errors'],
+            'level': 'INFO',
+        },
+        'django.security': {
+            'handlers': ['file_security'],
             'level': 'INFO',
         },
     },
     'handlers': {
-        'news': {
+        'consol_debug': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'consol_debug',
+        },
+        'consol_warning': {
+            'level': 'WARNING',
+            'class': 'logging.StreamHandler',
+            'formatter': 'consol_warning',
+        },
+        'consol_error': {
+            'level': 'WARNING',
+            'class': 'logging.StreamHandler',
+            'formatter': 'error',
+        },
+        'file_general': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': 'debug.log',
-            'formatter': 'consolformat',
+            'filename': 'general.log',
+            'formatter': 'file_general',
         },
-        'consol': {
-            # 'lavel': 'INFO',
-            'class': 'logging.StreamHandler',
-            # 'formatter': 'consolformat',
+        'file_errors': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'errors.log',
+            'formatter': 'error',
+        },
+        'file_security': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'security.log',
+            'formatter': 'file_general',
         },
         'mail_admins': {
-            'level': 'INFO',
+            'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-            'formatter': 'consolformat',
+            'formatter': 'consol_warning',
             # 'filters': ['require_debug_false'],
             'include_html': True,
         },
     },
     'formatters': {
-        'consolformat': {
-            'format': '{levelname} {message} {asctime}',
+        'consol_debug': {
+            'format': '{asctime} {levelname} {message}',
             'style': '{',
-            # 'datetime': '%m.%d %H:%M:%S',
         },
-        'generalformatter': {
+        'consol_warning': {
+            'format': '{asctime} {levelname} {message} {pathname}',
+            'style': '{',
+        },
+        'error': {
+            'format': '{asctime} {levelname} {message} {pathname} {exc_info}',
+            'style': '{',
+        },
+        'file_general': {
             'format': '{asctime} {levelname} {module} {message}',
-            'datetime': '%m.%d %H:%M:%S',
-            'style': '{',
-        },
-        'errorsformates': {
-            'format': '{asctime} {levelname} {pathname} {stack_info}',
             'style': '{',
         },
     },

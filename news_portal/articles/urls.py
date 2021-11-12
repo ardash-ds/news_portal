@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .views import (
     PostList, PostDetail, PostSearch, user_list, post_list, comment_list,
     PostCreateView, PostDeleteView, PostUpdateView, BaseRegisterView, upgrade_me,
-    subscribe, CategoryDetail
+    subscribe, CategoryDetail,
 )
 
 
