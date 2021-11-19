@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .views import (
     PostList, PostDetail, PostSearch, user_list, post_list, comment_list,
     PostCreateView, PostDeleteView, PostUpdateView, BaseRegisterView, upgrade_me,
-    subscribe, CategoryDetail,
+    subscribe, CategoryDetail, Index,
 )
 
 
@@ -25,4 +25,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('subscribe/<int:pk>', subscribe, name='subscribe'),
     path('category/<int:pk>', CategoryDetail.as_view(), name='category'),
+    path('translatre/', Index.as_view()),
 ]

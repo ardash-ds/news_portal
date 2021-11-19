@@ -4,6 +4,8 @@ from django.db.models import Sum
 from django.contrib.auth.forms import UserCreationForm
 from allauth.account.forms import SignupForm
 from django import forms
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext_lazy # импортируем «ленивый» геттекст с подсказкой
 
 
 class Author(models.Model):
@@ -25,7 +27,7 @@ class Author(models.Model):
         return f'{self.authorUser}'
 
 class Category(models.Model):
-    name = models.CharField(max_length=64, unique=True)
+    name = models.CharField(max_length=64, unique=True, help_text=_('category name'))
     subscribers = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
@@ -76,7 +78,11 @@ class Post(models.Model):
 
 
 class PostCategory(models.Model):
-    postThrough = models.ForeignKey(Post, on_delete=models.CASCADE)
+    postThrough = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        verbose_name = pgettext_lazy('help text for MyModel model', 'This is the help text'),
+    )
     categoryThrough = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):

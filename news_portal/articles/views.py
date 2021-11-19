@@ -8,9 +8,20 @@ from .filters import PostFilter, F, C, X  # импортируем недавн�
 from .models import Post, BaseRegisterForm, Category
 from .forms import PostForm
 import logging
+from django.utils.translation import activate, get_supported_language_variant, LANGUAGE_SESSION_KEY, gettext as _
 
 
 logger = logging.getLogger(__name__)
+
+
+class Index(View):
+    def get(self, request):
+        string = _('Hello world')
+        context = {
+            'string': string,
+        }
+
+        return HttpResponse(render(request, 'temp.html', context))
 
 
 class PostList(ListView):

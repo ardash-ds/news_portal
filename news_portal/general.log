@@ -85,3 +85,102 @@ NameError: name 'arequest' is not defined
 2021-11-12 13:00:09,558 INFO autoreload Watching for file changes with StatReloader
 2021-11-12 13:05:35,574 INFO autoreload C:\projects\new\news_portal\articles\urls.py changed, reloading.
 2021-11-12 13:05:38,653 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 13:58:46,569 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 13:59:19,925 WARNING log Not Found: /favicon.ico
+2021-11-16 14:06:07,177 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:07:51,914 WARNING log Not Found: /favicon.ico
+2021-11-16 14:16:36,501 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:17:27,248 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-16 14:17:29,420 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:18:34,491 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-16 14:18:36,601 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:25:51,716 INFO autoreload C:\projects\new\news_portal\articles\models.py changed, reloading.
+2021-11-16 14:25:53,002 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:26:04,878 INFO autoreload C:\projects\new\news_portal\articles\models.py changed, reloading.
+2021-11-16 14:26:06,901 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:32:11,632 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:35:15,037 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:35:35,034 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:44:09,790 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:46:21,359 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-16 14:46:23,024 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:46:38,611 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-16 14:46:40,158 INFO autoreload Watching for file changes with StatReloader
+2021-11-16 14:51:46,484 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-16 14:51:48,234 INFO autoreload Watching for file changes with StatReloader
+2021-11-18 16:45:48,982 INFO autoreload Watching for file changes with StatReloader
+2021-11-18 16:46:01,993 WARNING log Not Found: /favicon.ico
+2021-11-18 17:02:16,886 INFO autoreload Watching for file changes with StatReloader
+2021-11-18 17:03:13,922 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 10:54:20,351 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 10:54:25,568 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 10:54:31,621 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 11:13:14,614 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:16:07,014 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:16:08,985 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:16:32,500 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:16:33,927 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:17:18,267 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:17:20,784 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:17:24,657 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:17:27,531 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:18:19,544 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:18:21,161 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:18:50,800 INFO autoreload C:\projects\new\news_portal\articles\urls.py changed, reloading.
+2021-11-19 11:18:53,220 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:20:09,272 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:20:11,454 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:20:46,096 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 11:20:48,153 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:26:43,141 INFO autoreload C:\projects\new\news_portal\news_portal\urls.py changed, reloading.
+2021-11-19 11:26:45,936 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:27:33,442 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 11:27:36,178 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:27:58,770 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 11:28:00,278 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:28:40,222 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 11:28:43,096 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:30:27,001 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:34:12,611 WARNING log Not Found: /posts/search/ru/
+2021-11-19 11:35:00,471 INFO autoreload C:\projects\new\news_portal\articles\urls.py changed, reloading.
+2021-11-19 11:35:02,838 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:35:36,509 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:35:57,265 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 11:36:00,826 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:36:44,764 INFO autoreload C:\projects\new\news_portal\articles\urls.py changed, reloading.
+2021-11-19 11:36:46,845 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:37:10,938 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 11:37:12,711 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:37:29,851 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 11:37:31,475 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:39:10,826 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:49:30,655 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:49:33,822 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:49:37,182 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:49:38,884 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:49:50,079 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:49:51,823 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:50:06,155 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:50:07,662 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:50:23,192 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:50:24,701 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:51:27,700 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 11:51:29,148 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 11:51:50,446 INFO autoreload C:\projects\new\news_portal\articles\urls.py changed, reloading.
+2021-11-19 11:51:52,312 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 12:03:02,626 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 12:03:05,038 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 12:03:37,258 WARNING log Not Found: /posts/translatre/ru
+2021-11-19 12:07:56,740 INFO autoreload C:\projects\new\news_portal\articles\models.py changed, reloading.
+2021-11-19 12:07:58,374 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 12:08:18,890 INFO autoreload C:\projects\new\news_portal\articles\models.py changed, reloading.
+2021-11-19 12:08:20,865 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 12:08:38,701 INFO autoreload C:\projects\new\news_portal\articles\models.py changed, reloading.
+2021-11-19 12:08:40,836 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 12:13:43,033 INFO autoreload C:\projects\new\news_portal\articles\views.py changed, reloading.
+2021-11-19 12:13:47,825 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 12:24:58,853 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 12:25:01,250 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 12:25:49,562 INFO autoreload C:\projects\new\news_portal\news_portal\settings.py changed, reloading.
+2021-11-19 12:25:51,279 INFO autoreload Watching for file changes with StatReloader
+2021-11-19 12:34:57,250 INFO autoreload Watching for file changes with StatReloader
